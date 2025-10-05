@@ -1,0 +1,23 @@
+# When main branch is updated:
+# - Build site
+# - Deploy to GitHub Pages
+# - Update dependabot dependency graph
+name: Maven Site Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]
+  schedule:
+  - cron: "0 0 * * *"
+
+permissions:
+  id-token: write
+  contents: write
+  pages: write
+
+jobs:
+  deploy:
+    uses: sentrysoftware/workflows/.github/workflows/maven-site-deploy.yml@main
+    with:
+      jdkVersion: "17"
+    secrets: inherit

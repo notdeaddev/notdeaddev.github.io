@@ -1,0 +1,81 @@
+keywords: contributor,github,top
+description: The list of contributors in NotDead.dev open-source projects.
+<!--
+  ╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲
+  NotDead.dev
+  ჻჻჻჻჻჻
+  Copyright 2025 NotDead.dev
+  ჻჻჻჻჻჻
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  THE SOFTWARE.
+  ╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱
+  -->
+
+Contributors
+============
+
+#if($runsOnCi != "true")#*
+*#*List produced when running on GitHub Actions only, when `CI=true`*.#*
+*##else
+#* Fetch the GitHub API *#
+#set( $repoList = $json.fetch("https://api.github.com/orgs/notdeaddev/repos?type=public&sort=full_name&per_page=100") )
+#if( $repoList && $repoList.size() > 0 )
+
+#* Build a map with all contributors *#
+#set( $contribMap = {} )
+#foreach ($repo in $repoList.iterator())
+  #if (!$repo.fork && !$repo.archived && !$repo.disabled)
+    $log.debug("Now fetching " + $repo.name + " repository")
+    #* For each repo, fetch the list of contributors *#
+    #set( $contributors = $json.fetch($repo.contributors_url) )
+    #if ($contributors && $contributors.size() > 0)
+      #* For each contributor in the repo *#
+      #foreach ($contributor in $contributors.iterator())
+        #* Skip bots *#
+        #if ($contributor.login != "actions-user" && $contributor.login != "dependabot[bot]")
+          $log.debug($contributor.login + " contributed " + $contributor.contributions + " to " + $repo.name)
+          #if ($contribMap.containsKey($contributor.login))
+            #* Add contributions count to the existing entry *#
+            #set( $contribMap[$contributor.login].contributions = $contribMap[$contributor.login].contributions + $contributor.contributions )
+          #else
+            #* Add a new entry to the map *#
+            #set( $_ = $contribMap.put($contributor.login, $contributor) )
+          #end
+        #end
+      #end
+    #end
+  #else
+    $log.debug("Skipping " + $repo.name + " repository")
+  #end
+#end
+
+#* Sort the map *#
+#set( $sortedContribMap = $collection.sort($contribMap, "contributions:desc") )
+
+#* Output the Markdown table *#
+| Name | Contributions |
+|---|---|
+#foreach ($contributor in $sortedContribMap)
+| [$contributor.login]($contributor.html_url) | $contributor.contributions |
+#end
+
+#* If no result, display a message *#
+#else
+$log.error("Could not fetch repositories")
+*No repositories.*
+#end
+
+#end
