@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲
+  NotDead.dev
+  ჻჻჻჻჻჻
+  Copyright 2025 NotDead.dev
+  ჻჻჻჻჻჻
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  THE SOFTWARE.
+  ╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱
+  -->
+
+<project name="NotDead.dev">
+
+	<skin>
+		<groupId>org.sentrysoftware.maven</groupId>
+		<artifactId>sentry-maven-skin</artifactId>
+		<version>6.4.01</version>
+	</skin>
+
+	<bannerLeft>
+		<src>images/notdead.dev-logo-full-162x92.png</src>
+		<href>https://notdead.dev</href>
+		<name>NotDead.dev</name>
+	</bannerLeft>
+
+	<bannerRight>
+		<href>${project.scm.url}</href>
+		<name><![CDATA[<i class="fa-brands fa-github"></i> Edit on GitHub]]></name>
+	</bannerRight>
+
+	<!-- <googleAnalyticsAccountId>GTM-MDV2QM2P</googleAnalyticsAccountId> -->
+
+	<custom>
+		<projectVersion>${today}</projectVersion>
+		<publishDate>${timestamp}</publishDate>
+		<keywords>open source,oss,abandonware</keywords>
+		<bodyClass>notdead</bodyClass>
+
+		<additionalLinks>
+			<link>
+				<name>Terms of Service</name>
+				<href>https://notdead.dev/legal/general.html</href>
+			</link>
+			<link>
+				<name>Privacy Policy</name>
+				<href>https://notdead.dev/legal/privacy.html</href>
+			</link>
+			<link>
+				<name>Cookie Policy</name>
+				<href>https://notdead.dev/legal/cookies.html</href>
+			</link>
+			<link>
+				<name>Disclaimer</name>
+				<href>https://notdead.dev/legal/disclaimer.html</href>
+			</link>
+			<link>
+				<name>Trademarks</name>
+				<href>https://notdead.dev/legal/trademarks.html</href>
+			</link>
+			<link>
+				<name>Code of Ethics</name>
+				<href>https://notdead.dev/legal/ethics.html</href>
+			</link>
+		</additionalLinks>
+	</custom>
+
+	<body>
+
+		<links>
+			<item name="&lt;i class='fa-brands fa-github'>&lt;/i> GitHub" href="https://github.com/notdeaddev" />
+			<item name="AngularJS" href="https://notdead.dev/angularjs/" />
+		</links>
+
+		<menu name="Topics">
+			<item name="Home" href="index.html" />
+			<item name="NotDead Repositories" href="repos.html" />
+			<item name="Contributors" href="contributors.html" />
+			<item name="How to Contribute" href="contributing.html" />
+			<item name="Code of Conduct" href="code-of-conduct.html" />
+			<item name="Branching Model" href="branching.html" />
+		</menu>
+
+	</body>
+
+</project>
