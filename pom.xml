@@ -169,6 +169,9 @@
 			<plugin>
 				<artifactId>maven-changelog-plugin</artifactId>
 				<version>2.3</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
 			</plugin>
 
 			<!-- Default project-info-reports -->
